@@ -1,0 +1,99 @@
+# swagger.yaml
+
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: OpenAI Assistant API version
+  description: Description of openAI Assistant API 
+paths:
+  /create-assistant:
+    post:
+      summary: Create an OpenAI assistant
+      tags:
+        - Assistant
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                instructions:
+                  type: string
+                name:
+                  type: string
+                tools:
+                  type: array
+                  items:
+                    type: object
+                model:
+                  type: string
+        example:
+          instructions: "You are an agent, Calling from fintech company. you are a FRIENDLY and helpful agent, Who is going to call to the customer and telling them that your EMI is going to deduct is next three days so keep balance in the account, If customer says its not possible to pay on the time or customer says they are not going to pay then tell them they need to pay the penalty for the delay"
+          name: "Bank Agent"
+          tools:
+            - type: "code_interpreter"
+          model: "gpt-4-turbo-preview"
+      responses:
+        '200':
+          description: Successful response with the created assistant
+        '500':
+          description: Failed to create assistant
+  /list-assistant:
+    get:
+      summary: Get a list of OpenAI assistants
+      tags:
+        - Assistant
+      responses:
+        '200':
+          description: Successful response with the list of assistants
+        '500':
+          description: Failed to list assistants
+  /thread:
+    post:
+      summary: Open a new thread
+      tags:
+        - Assistant
+      responses:
+        '200':
+          description: Successful response with the thread ID
+        '500':
+          description: Failed to open a new thread
+  /message:
+    post:
+      summary: Add a message to a thread and run the assistant
+      tags:
+        - Assistant
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                threadId:
+                  type: string
+      responses:
+        '200':
+          description: Successful response with the message ID
+        '500':
+          description: Failed to add a message or run the assistant
+  /delete/assistants/{assistantId}:
+    delete:
+      summary: Delete an OpenAI assistant
+      tags:
+        - Assistant
+      parameters:
+        - in: path
+          name: assistantId
+          required: true
+          description: ID of the assistant to delete
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response with the deleted assistant
+        '404':
+          description: Assistant not found
+        '500':
+          description: Failed to delete assistant
