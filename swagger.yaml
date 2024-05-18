@@ -27,12 +27,12 @@ paths:
                     type: object
                 model:
                   type: string
-        example:
-          instructions: "You are an agent, Calling from fintech company. you are a FRIENDLY and helpful agent, Who is going to call to the customer and telling them that your EMI is going to deduct is next three days so keep balance in the account, If customer says its not possible to pay on the time or customer says they are not going to pay then tell them they need to pay the penalty for the delay"
-          name: "Bank Agent"
-          tools:
-            - type: "code_interpreter"
-          model: "gpt-4-turbo-preview"
+            example:
+              instructions: "You are a personal math tutor. Write and run code to answer math questions."
+              name: "Math Tutor"
+              tools:
+                - type: "code_interpreter"
+              model: "gpt-4-turbo-preview"
       responses:
         '200':
           description: Successful response with the created assistant

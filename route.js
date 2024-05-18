@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const functions = require('./assistant');
 
-let  assistantId ;
+var  assistantId ;
 let pollingInterval;
 
 
